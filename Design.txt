@@ -1,1 +1,30 @@
-test adding something.
+class FinancialInstrument
+  - name string
+  - currentPrice int
+  - availableVolume
+
+  + sell
+  + buy
+
+class Stock extends FinancialInstrument
+  - companyName string
+  - tickerSymbol string
+  - openPrice double
+  - closePrice double
+  - volumeTraded int
+
+class Commodities extends FinancialInstrument
+  - volumeTraded int
+
+class Market 
+  - vector<Stock> stockList
+  - vector<Commodities> commoditiesList
+  + PrintAllStocks(int from, int to)
+
+
+
+class Player
+  - playerName
+  - cash
+  - vector<FinancialInstrument *> holdings;
+  
