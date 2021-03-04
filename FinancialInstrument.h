@@ -14,10 +14,9 @@ class FinancialInstrument {
     void SetName(string passedName);
     void SetCurrentPrice(double passedCurrentPrice);
     void SetAvailableVolume(int passedAvailableVolume);
-  
-class FinancialInstrument
 
+    string GetName();
+    double GetCurrentPrce();
+    int GetAvailableVolume();
 
-  + sell
-  + buy
 };
