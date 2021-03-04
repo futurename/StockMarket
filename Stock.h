@@ -17,4 +17,5 @@ public:
     double getOpenPrice();
     double getClosePrice();
     int getVolumeTraded();
+    string getTickerSymbol();
 };

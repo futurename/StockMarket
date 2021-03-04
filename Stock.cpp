@@ -24,3 +24,7 @@ int Stock::getVolumeTraded() {
     return volumeTraded;
 }
 
+string Stock::getTickerSymbol() {
+    return tickerSymbol;
+}
+
