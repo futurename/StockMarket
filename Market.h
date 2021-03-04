@@ -1,12 +1,10 @@
 
-#ifndef STOCKMARKET_MARKET_H
-#define STOCKMARKET_MARKET_H
-
 #include <iostream>
 #include <vector>
 
 #include "Stock.h"
 #include "Commodities.h"
+#include "FinancialInstrument.h"
 
 using namespace std;
 
@@ -15,7 +13,12 @@ private:
     vector<Stock> stockList;
     vector<Commodities> commoditiesList;
 public:
+    void printFinancialInstruments(vector<FinancialInstrument> &list, int from, int to);
+
+    void addFinancialInstrument(FinancialInstrument* financialInstrument);
+
+    void removeFinancialInstrument();
+
+
+
 };
-
-
-#endif //STOCKMARKET_MARKET_H
