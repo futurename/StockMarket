@@ -63,7 +63,23 @@ bool valideInput(string basicString) {
     return true;
 }
 
-void tradeCommodities() {
+void tradeCommodities() {  
+  cout << setw(20) << setfill('*') << "" << " Trade Comodities Menu " << setw(20) << "" << endl;
+  cout << setfill(' ');
+  cout << "Do you want to buy or sell commodities" << endl;
+  cout << "1. Buy" << endl;
+  cout << "2. Sell" << endl;
+  cout << setfill('*') << setw(51) << "" << endl;
+  cout << setfill(' ');
+
+  string userInput;
+  getline(cin, userInput);
+      if (valideInput(userInput)) {
+          switch (stoi(userInput)) {
+            default: break;
+          }
+      }
+
 
 }
 

@@ -35,7 +35,7 @@ public:
     //bool validateBuy(double amount);
 
     // deduct the amount 
-    bool deduct(double amount);
+    bool modifyCash(double amount);
 
     // give how many shares I can buy if they cost this price
     int MaxShareAtPrice(double price);
