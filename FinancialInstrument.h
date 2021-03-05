@@ -9,6 +9,7 @@ protected:
     string name;
     double currentPrice;
     int availableVolume;
+    int uniqueId;
 
 public:
     void setName(string passedName);
@@ -25,4 +26,5 @@ public:
 
     int getAvailableVolume();
 
+    int getUniqueId();
 };

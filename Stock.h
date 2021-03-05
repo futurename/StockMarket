@@ -13,7 +13,7 @@ private:
     int volumeTraded = 0.0;
 
 public:
-    Stock(string name, string symbol, double currentPrice =0.0);
+    Stock(string name, string symbol, int uniqueId, double currentPrice =0.0);
 
     string getCompanyName();
 

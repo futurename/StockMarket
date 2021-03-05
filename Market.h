@@ -1,4 +1,5 @@
 #pragma  once
+
 #include <iostream>
 #include <vector>
 
@@ -8,19 +9,26 @@
 
 using namespace std;
 
-class Market{
+
+class Market {
 private:
-    vector<Stock*> stockList;
-    vector<Commodities*> commoditiesList;
+    vector<Stock> stockList;
+    vector<Commodities *> commoditiesList;
+
 public:
-    void print(vector<FinancialInstrument* > list, int from, int to);
+    template<typename T>
+    void print(vector<T> *list, int length, int from = 0);
 
-    void addOne(vector<FinancialInstrument*> list, FinancialInstrument* financialInstrument);
+    template<typename T>
+    void addOne(vector<T> *list, T &t);
 
-    void removeOne(vector<FinancialInstrument*> list, FinancialInstrument &financialInstrument);
+    template<typename T>
+    void removeOne(vector<T> *list, int uniqueId);
 
-    vector<Stock*> getStockList();
+    vector<Stock> *getStockList();
 
-    vector<Commodities*> getCommoditiesList();
+    vector<Commodities *> getCommoditiesList();
 
 };
+
+#include "Market.tpp"

@@ -5,9 +5,10 @@
 using namespace std;
 
 //constructor for init a stock
-Stock::Stock(string name, string symbol, double currentPrice) {
+Stock::Stock(string name, string symbol, int uniqueId, double currentPrice) {
     companyName = name;
     tickerSymbol = symbol;
+    this->uniqueId = uniqueId;
     setCurrentPrice(currentPrice);
 }
 
@@ -38,7 +39,7 @@ string Stock::getTickerSymbol() {
 
 //print stock info
 void Stock::printInfo() const {
-    cout << "Stock: " << companyName << ", <" << tickerSymbol << ">, current price: $"
+    cout << "Stock: [" <<uniqueId <<"], " << companyName << ", <" << tickerSymbol << ">, current price: $"
          << fixed << setprecision(2) << currentPrice << ", open: $"
          << openPrice << ", close: $" << closePrice << endl;
 }

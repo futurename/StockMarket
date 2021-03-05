@@ -2,6 +2,7 @@ class FinancialInstrument
   - name string
   - currentPrice int
   - availableVolume
+  - uniqueId
 
   + sell
   + buy

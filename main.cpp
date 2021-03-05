@@ -3,19 +3,25 @@
 #include <vector>
 #include "Market.h"
 
-
 using namespace std;
 
 int main() {
     Market market;
-    Stock stock("Google", "GOGL");
-    Stock *stockptr = &stock;
+    static int uniqueCounter = 0;
 
-    vector<FinancialInstrument *> list;
+    Stock stock("Google", "GOGL", uniqueCounter++);
 
-    list.push_back(stockptr);
+    market.addOne(market.getStockList(), stock);
+    market.addOne(market.getStockList(), stock);
 
-    list.at(0)->printInfo();
+    market.getStockList()->at(0).printInfo();
+    market.getStockList()->at(1).printInfo();
+
+
+    market.removeOne(market.getStockList(), 0);
+
+    cout << "size after deletion: " << market.getStockList()->size() << endl;
+    market.print(market.getStockList(), 2, 0);
 
     return 0;
 }

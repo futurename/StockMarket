@@ -1,4 +1,5 @@
 #include "FinancialInstrument.h"
+#include "Market.h"
 
 void FinancialInstrument::setName(string passedName) {
     name = passedName;
@@ -27,3 +28,8 @@ int FinancialInstrument::getAvailableVolume() {
 void FinancialInstrument::printInfo() const {
     cout << "FinancialInstrument print()" << endl;
 }
+
+int FinancialInstrument::getUniqueId() {
+    return uniqueId;
+}
+
