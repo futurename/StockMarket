@@ -5,9 +5,9 @@ void initMarket(Market &market, int &i);
 
 void printMainMenu();
 
-void tradeStocks(Market& market, Player &player);
+void tradeStocks(Market &market, Player &player);
 
-void tradeCommodities(Market& market, Player &player);
+void tradeCommodities(Market &market, Player &player);
 
 bool valideInput(string basicString);
 
@@ -20,7 +20,7 @@ int main() {
 
     initMarket(market, uniqueCounter);
 
-    Holding holding1(2, 340, 4054.0);
+   /* Holding holding1(2, 340, 4054.0);
     Holding holding2(5, 340, 4054.0);
     Holding holding3(12, 340, 4054.0);
     Holding holding4(16, 340, 4054.0);
@@ -28,15 +28,13 @@ int main() {
     player.addHolding(holding2);
     player.addHolding(holding3);
     player.addHolding(holding4);
-    cout << endl;
+    cout << endl;*/
 
     market.printHoldings(player);
 
     string userInput;
-    bool flag = true;
 
-    while (flag) {
-        flag = false;
+    while (true) {
         printMainMenu();
         getline(cin, userInput);
 
@@ -49,23 +47,18 @@ int main() {
                     tradeCommodities(market, player);
                     break;
                 case 3:
-                    market.updateAllPrices(Market::SIMPLE_RAMDOM);
+                    market.printHoldings(player);
                     break;
                 case 4:
+                    market.updateAllPrices(Market::SIMPLE_RAMDOM);
+                    break;
+                case 5:
                     exit(0);
                 default:
                     cout << "No such choice, please try again.." << endl;
-                    flag = true;
             }
-            
         }
     }
-
-    cout << "The Market will updates: " << endl;
-    market.updateAllPrices(Market::SIMPLE_RAMDOM);
-    market.print(market.getStockList(), 0);
-    market.print(market.getCommoditiesList(), 0);
-
 
     return 0;
 }
@@ -79,146 +72,145 @@ bool valideInput(string basicString) {
     return true;
 }
 
-Commodities* askUserWhichCommodity(Market &market){
-  vector<Commodities>* commodities = market.getCommoditiesList();
-  
-  while(1){
-    for(unsigned int i = 0; i < commodities->size(); i++ ){
-      cout << i + 1 << ". ";
-      (*commodities)[i].printInfo();
+Commodities *askUserWhichCommodity(Market &market) {
+    vector<Commodities> *commodities = market.getCommoditiesList();
+
+    while (1) {
+        for (unsigned int i = 0; i < commodities->size(); i++) {
+            cout << i + 1 << ". ";
+            (*commodities)[i].printInfo();
+        }
+        string userInput;
+        int indexCommodity;
+        getline(cin, userInput);
+        if (valideInput(userInput)) {
+            indexCommodity = stoi(userInput);
+            return (&((*commodities)[indexCommodity - 1]));
+        }
     }
-    string userInput;
-    int indexCommodity;
-    getline(cin, userInput);
-    if (valideInput(userInput)) {
-        indexCommodity = stoi(userInput);
-        return(&((*commodities)[indexCommodity - 1]));
-    }
-  }
-  // We never arrive here
-  return(&(*commodities)[0]);
+    // We never arrive here
+    return (&(*commodities)[0]);
 }
 
 
+void tradeCommodities(Market &market, Player &player) {
+    // TODO : modify the setw
+    cout << setw(10) << setfill('*') << "" << " Trade Comodities Menu " << setw(10) << "" << endl;
+    cout << setfill(' ');
+    cout << "Do you want to buy or sell commodities" << endl;
+    cout << "1. Buy" << endl;
+    cout << "2. Sell" << endl;
+    cout << setfill('*') << setw(51) << "" << endl;
+    cout << setfill(' ');
 
-void tradeCommodities(Market &market, Player &player) {  
-  // TODO : modify the setw
-  cout << setw(10) << setfill('*') << "" << " Trade Comodities Menu " << setw(10) << "" << endl;
-  cout << setfill(' ');
-  cout << "Do you want to buy or sell commodities" << endl;
-  cout << "1. Buy" << endl;
-  cout << "2. Sell" << endl;
-  cout << setfill('*') << setw(51) << "" << endl;
-  cout << setfill(' ');
+    Commodities *commodity;
+    int nbShares;
 
-  Commodities* commodity;
-  int nbShares;
-
-  string userInput, userInput2;
-  getline(cin, userInput);
-      if (valideInput(userInput)) {
-          switch (stoi(userInput)) {
+    string userInput, userInput2;
+    getline(cin, userInput);
+    if (valideInput(userInput)) {
+        switch (stoi(userInput)) {
             case 1: // Buy          
-              commodity = askUserWhichCommodity(market);
+                commodity = askUserWhichCommodity(market);
 
-              cout << "You can buy until <" <<
-              player.MaxShareAtPrice(commodity->getCurrentPrce()) << "> shares" << endl;
-              while(1){
-                do{
-                  cout << "How many share do you want to buy? ";
-                  getline(cin, userInput2);
-                }while (!valideInput(userInput2));
-                nbShares = stoi(userInput2);
-                if(nbShares > player.MaxShareAtPrice(commodity->getCurrentPrce()))
-                  cout << "You can't buy so many" << endl;
-                else 
-                  break;
-              }
+                cout << "You can buy until <" <<
+                     player.MaxShareAtPrice(commodity->getCurrentPrce()) << "> shares" << endl;
+                while (1) {
+                    do {
+                        cout << "How many share do you want to buy? ";
+                        getline(cin, userInput2);
+                    } while (!valideInput(userInput2));
+                    nbShares = stoi(userInput2);
+                    if (nbShares > player.MaxShareAtPrice(commodity->getCurrentPrce()))
+                        cout << "You can't buy so many" << endl;
+                    else
+                        break;
+                }
 
-              market.buyByPlayer(player, commodity, nbShares);
+                market.buyByPlayer(player, commodity, nbShares);
 
-              cout << "Now, your current holdings are: "<< endl;
-              market.printHoldings(player);
+                cout << "Now, your current holdings are: " << endl;
+                market.printHoldings(player);
 
-              break;
+                break;
             case 2:
-              cout << "You will sell. BUILDING...." << endl;
-              break; 
-            default: 
-              break;
-          }
-      }
+                cout << "You will sell. BUILDING...." << endl;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
-Stock* askUserWhichStock(Market &market){
-  vector<Stock>* stocks = market.getStockList();
-  
-  while(1){
-    for(unsigned int i = 0; i < stocks->size(); i++ ){
-      cout << i + 1 << ". ";
-      (*stocks)[i].printInfo();
+Stock *askUserWhichStock(Market &market) {
+    vector<Stock> *stocks = market.getStockList();
+
+    while (1) {
+        for (unsigned int i = 0; i < stocks->size(); i++) {
+            cout << i + 1 << ". ";
+            (*stocks)[i].printInfo();
+        }
+        string userInput;
+        int indexCommodity;
+        getline(cin, userInput);
+        if (valideInput(userInput)) {
+            indexCommodity = stoi(userInput);
+            return (&((*stocks)[indexCommodity - 1]));
+        }
     }
-    string userInput;
-    int indexCommodity;
-    getline(cin, userInput);
-    if (valideInput(userInput)) {
-        indexCommodity = stoi(userInput);
-        return(&((*stocks)[indexCommodity - 1]));
-    }
-  }
-  // We never arrive here
-  return(&(*stocks)[0]);
+    // We never arrive here
+    return (&(*stocks)[0]);
 }
 
 void tradeStocks(Market &market, Player &player) {
-      // TODO : modify the setw
-  cout << setw(10) << setfill('*') << "" << " Trade stocks Menu " << setw(10) << "" << endl;
-  cout << setfill(' ');
-  cout << "Do you want to buy or sell stock" << endl;
-  cout << "1. Buy" << endl;
-  cout << "2. Sell" << endl;
-  cout << setfill('*') << setw(51) << "" << endl;
-  cout << setfill(' ');
+    // TODO : modify the setw
+    cout << setw(10) << setfill('*') << "" << " Trade stocks Menu " << setw(10) << "" << endl;
+    cout << setfill(' ');
+    cout << "Do you want to buy or sell stock" << endl;
+    cout << "1. Buy" << endl;
+    cout << "2. Sell" << endl;
+    cout << setfill('*') << setw(51) << "" << endl;
+    cout << setfill(' ');
 
-  Stock* stock;
-  int nbShares;
+    Stock *stock;
+    int nbShares;
 
-  string userInput, userInput2;
-  getline(cin, userInput);
-      if (valideInput(userInput)) {
-          switch (stoi(userInput)) {
+    string userInput, userInput2;
+    getline(cin, userInput);
+    if (valideInput(userInput)) {
+        switch (stoi(userInput)) {
             case 1: // Buy          
-              stock = askUserWhichStock(market);
+                stock = askUserWhichStock(market);
 
-              cout << "You can buy until " <<
-              player.MaxShareAtPrice(stock->getCurrentPrce()) << "shares" << endl;              
-              while(1){
-                do{
-                  cout << "How many share do you want to buy? ";
-                  getline(cin, userInput2);
-                }while (!valideInput(userInput2));
-                nbShares = stoi(userInput2);
-                if(nbShares > player.MaxShareAtPrice(stock->getCurrentPrce()))
-                  cout << "You can't buy so many" << endl;
-                else 
-                  break;
-              }
+                cout << "You can buy until " <<
+                     player.MaxShareAtPrice(stock->getCurrentPrce()) << " shares" << endl;
+                while (1) {
+                    do {
+                        cout << "How many share do you want to buy? ";
+                        getline(cin, userInput2);
+                    } while (!valideInput(userInput2));
+                    nbShares = stoi(userInput2);
+                    if (nbShares > player.MaxShareAtPrice(stock->getCurrentPrce()))
+                        cout << "You can't buy so many" << endl;
+                    else
+                        break;
+                }
 
-              market.buyByPlayer(player, stock, nbShares);
+                market.buyByPlayer(player, stock, nbShares);
 
-              cout << "Now, your current holdings are: "<< endl;
-              market.printHoldings(player);
+                cout << "Now, your current holdings are: " << endl;
+                market.printHoldings(player);
 
-              break;
+                break;
             case 2:
-              cout << "You will sell. BUILDING...." << endl;
+                cout << "You will sell. BUILDING...." << endl;
 
 
-              break; 
-            default: 
-              break;
-          }
-      }
+                break;
+            default:
+                break;
+        }
+    }
 
 }
 
@@ -227,8 +219,9 @@ void printMainMenu() {
     cout << setfill(' ');
     cout << "1. Trading stocks today?" << endl
          << "2. Trading commodities today?" << endl
-         << "3. Bypass today?" << endl
-         << "4. Quit?" << endl
+         << "3. Print holdings?" << endl
+         << "4. Bypass today?" << endl
+         << "5. Quit?" << endl
          << setfill('*') << setw(51) << "" << endl;
     cout << setfill(' ');
 }

@@ -134,6 +134,10 @@ string Market::getTypeById(int id) {
 
 
 void Market::printHoldings(Player &player) {
+    if(player.getHodings().size() == 0){
+        cout << "Ohh, no any holding in your account, buy something today!" << endl;
+        return;
+    }
     cout << setfill('*') << setw(44) << "" << " All Holdings " << setw(44) << ""<< endl;
     for (Holding& holding : player.getHodings()) {
         int id = holding.getUniqueID();
