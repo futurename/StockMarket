@@ -8,7 +8,7 @@ using namespace std;
 class Stock : public FinancialInstrument {
 public:
     enum INDUSTRY {
-        DIGITAL, MEDICAL, ENERGY, BANK
+        DIGITAL, ENERGY, BANK
     };
 
     Stock(string companyName, string tickerSymbol, int uniqueId, INDUSTRY industry,

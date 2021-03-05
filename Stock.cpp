@@ -49,9 +49,9 @@ void Stock::printInfo() const {
          << " | <" << setw(4) << tickerSymbol
          << "> | " << setw(7) << getIndustryString(industry)
          << " | cur price: $"
-         << fixed << setprecision(2) << setw(6) << currentPrice
-         << " | pre Price: $" << setw(6) << previousPrice
-         << " | ava volume: " << setw(6) << left << availableVolume
+         << fixed << setprecision(2) << setw(7) << currentPrice
+         << " | pre Price: $" << setw(7) << previousPrice
+         //<< " | ava volume: " << setw(6) << left << availableVolume
          << " " << indicator << endl;
 }
 
@@ -69,8 +69,6 @@ string Stock::getIndustryString(Stock::INDUSTRY industry) {
         switch (industry) {
             case DIGITAL:
                 return "DIGITAL";
-            case MEDICAL:
-                return "MEDICAL";
             case ENERGY:
                 return "ENERGY";
             case BANK:
