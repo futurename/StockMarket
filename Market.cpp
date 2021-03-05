@@ -69,3 +69,31 @@ void Market::setNewPrice(FinancialInstrument *f) {
 int Market::getRandomRange(int range) {
     return rand() % range;
 }
+
+void Market::buyByPlayer(Player player, FinancialInstrument *f, int shares) {
+
+}
+
+void Market::sellByPlayer(Player player, FinancialInstrument *f, int shares) {
+
+}
+
+int Market::getUniqueIdFromStock(string tickerSymbol) {
+    for (Stock s: stockList) {
+        if (s.getTickerSymbol() == tickerSymbol) {
+            return s.getUniqueId();
+        }
+    }
+    cout << "This ticker symbol: " << tickerSymbol << " NOT exist in stock list" << endl;
+    return -1;
+}
+
+int Market::getUniqueIdFromCommodities(string name) {
+    for (Commodities c: commoditiesList) {
+        if (c.getName() == name) {
+            return c.getUniqueId();
+        }
+    }
+    cout << "This name: " << name << " NOT exist in commodities list" << endl;
+    return -1;
+}

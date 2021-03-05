@@ -6,6 +6,8 @@
 #include "Stock.h"
 #include "Commodities.h"
 #include "FinancialInstrument.h"
+#include "Player.h"
+#include "Holding.h"
 
 using namespace std;
 
@@ -36,6 +38,14 @@ public:
 
     void updatePricesWithSimpleRandom();
 
+    void buyByPlayer(Player player, FinancialInstrument *f, int shares);
+
+    void sellByPlayer(Player player, FinancialInstrument *f, int shares);
+
+    int getUniqueIdFromStock(string tickerSymbol);
+
+    int getUniqueIdFromCommodities(string name);
+
 private:
     vector<Stock> stockList;
     vector<Commodities> commoditiesList;
@@ -45,7 +55,7 @@ private:
 
     int getRandomRange(int range);
 
-    void setNewPrice(FinancialInstrument* f);
+    void setNewPrice(FinancialInstrument *f);
 };
 
 #include "Market.tpp"

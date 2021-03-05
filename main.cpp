@@ -28,5 +28,7 @@ int main() {
     market.updateAllPrices(Market::SIMPLE_RAMDOM);
     market.print(market.getStockList(), 0);
 
+
+
     return 0;
 }
