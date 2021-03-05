@@ -20,6 +20,18 @@ int main() {
 
     initMarket(market, uniqueCounter);
 
+    Holding holding1(2, 340, 4054.0);
+    Holding holding2(5, 340, 4054.0);
+    Holding holding3(12, 340, 4054.0);
+    Holding holding4(16, 340, 4054.0);
+    player.addHolding(holding1);
+    player.addHolding(holding2);
+    player.addHolding(holding3);
+    player.addHolding(holding4);
+    cout << endl;
+
+    market.printHoldings(player);
+
     string userInput;
     bool flag = true;
 
@@ -38,7 +50,7 @@ int main() {
                     break;
                 case 3:
                     market.updateAllPrices(Market::SIMPLE_RAMDOM);
-                    continue;
+                    break;
                 case 4:
                     exit(0);
                 default:
@@ -74,7 +86,6 @@ Commodities* askUserWhichCommodity(Market &market){
     for(unsigned int i = 0; i < commodities->size(); i++ ){
       cout << i + 1 << ". ";
       (*commodities)[i].printInfo();
-      cout << endl;
     }
     string userInput;
     int indexCommodity;
@@ -110,8 +121,8 @@ void tradeCommodities(Market &market, Player &player) {
             case 1: // Buy          
               commodity = askUserWhichCommodity(market);
 
-              cout << "You can buy until " <<
-              player.MaxShareAtPrice(commodity->getCurrentPrce()) << "shares" << endl;              
+              cout << "You can buy until <" <<
+              player.MaxShareAtPrice(commodity->getCurrentPrce()) << "> shares" << endl;
               while(1){
                 do{
                   cout << "How many share do you want to buy? ";
@@ -132,15 +143,11 @@ void tradeCommodities(Market &market, Player &player) {
               break;
             case 2:
               cout << "You will sell. BUILDING...." << endl;
-
-
               break; 
             default: 
               break;
           }
       }
-
-
 }
 
 Stock* askUserWhichStock(Market &market){
@@ -150,7 +157,6 @@ Stock* askUserWhichStock(Market &market){
     for(unsigned int i = 0; i < stocks->size(); i++ ){
       cout << i + 1 << ". ";
       (*stocks)[i].printInfo();
-      cout << endl;
     }
     string userInput;
     int indexCommodity;
