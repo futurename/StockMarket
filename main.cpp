@@ -20,6 +20,10 @@ int main() {
 
     initMarket(market, uniqueCounter);
 
+    //FinancialInstrument* f = Market::getPointerByUniqueId(2);
+
+   // cout << f->getUniqueId() << ", " << f->getName() << ", " << f->getCurrentPrce();
+
     string userInput;
 
     while (true) {

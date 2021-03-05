@@ -46,6 +46,8 @@ public:
 
     int getUniqueIdFromCommodities(string name);
 
+    FinancialInstrument *getPointerByUniqueId(int uniqueId);
+
 private:
     vector<Stock> stockList;
     vector<Commodities> commoditiesList;

@@ -72,13 +72,16 @@ int Market::getRandomRange(int range) {
 
 void Market::buyByPlayer(Player player, FinancialInstrument *f, int shares) {
     double value = f->getCurrentPrce() * shares;
-    player.deduct(value);
+    player.modifyCash(value * -1);
     Holding holding(f->getUniqueId(), shares, value);
     player.addHolding(holding);
 }
 
 void Market::sellByPlayer(Player player, FinancialInstrument *f, int shares) {
-
+    double value = f->getCurrentPrce() * shares;
+    player.modifyCash(value);
+    Holding holding(f->getUniqueId(), shares* -1, value * -1);
+    player.removeHolding(holding);
 }
 
 int Market::getUniqueIdFromStock(string tickerSymbol) {
@@ -99,4 +102,19 @@ int Market::getUniqueIdFromCommodities(string name) {
     }
     cout << "This name: " << name << " NOT exist in commodities list" << endl;
     return -1;
+}
+
+FinancialInstrument *Market::getPointerByUniqueId(int uniqueId) {
+    for(Stock &s: stockList){
+        if(s.getUniqueId() == uniqueId){
+            FinancialInstrument* result = &s;
+            return result;
+        }
+    }
+    for(Commodities &c: commoditiesList){
+        if(c.getUniqueId() == uniqueId){
+            FinancialInstrument* result = &c;
+            return result;
+        }
+    }
 }

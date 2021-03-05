@@ -40,12 +40,13 @@ public:
     // give how many shares I can buy if they cost this price
     int MaxShareAtPrice(double price);
 
-
     void addHolding(Holding holding);
 
-
-
     void removeHolding(Holding holding);
+
+    void autoPlay();
+
+    void printHoldings();
 
 
 };
