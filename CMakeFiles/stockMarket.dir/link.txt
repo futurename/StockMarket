@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/stockMarket.dir/main.cpp.o CMakeFiles/stockMarket.dir/Commodities.cpp.o CMakeFiles/stockMarket.dir/FinancialInstrument.cpp.o CMakeFiles/stockMarket.dir/Market.cpp.o CMakeFiles/stockMarket.dir/Player.cpp.o CMakeFiles/stockMarket.dir/Stock.cpp.o  -o stockMarket 

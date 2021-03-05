@@ -1,3 +1,0 @@
-/home/runner/StockMarket/CMakeFiles/rebuild_cache.dir
-/home/runner/StockMarket/CMakeFiles/stockMarket.dir
-/home/runner/StockMarket/CMakeFiles/edit_cache.dir
