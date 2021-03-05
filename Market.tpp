@@ -21,6 +21,9 @@ void Market::removeOne(vector<T> *list, int uniqueId) {
 template<typename T>
 void Market::print(vector<T> *list,  int length, int from) {
     int size = (*list).size();
+    if(length <= 0){
+        length = size;
+    }
     if (from < size) {
         length = length < size - from ? length: size - from;
         for (int i = from; i < length; i++) {
@@ -29,4 +32,5 @@ void Market::print(vector<T> *list,  int length, int from) {
     } else {
         cout << "From index <" << from << "> is out of bound. size of list <" << (*list).size() << ">" << endl;
     }
+    cout << endl;
 }

@@ -13,7 +13,7 @@ using namespace std;
 class Market {
 private:
     vector<Stock> stockList;
-    vector<Commodities *> commoditiesList;
+    vector<Commodities> commoditiesList;
 
 public:
     template<typename T>
@@ -27,7 +27,7 @@ public:
 
     vector<Stock> *getStockList();
 
-    vector<Commodities *> getCommoditiesList();
+    vector<Commodities> *getCommoditiesList();
 
 };
 

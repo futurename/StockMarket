@@ -5,11 +5,14 @@
 using namespace std;
 
 //constructor for init a stock
-Stock::Stock(string name, string symbol, int uniqueId, double currentPrice) {
-    companyName = name;
-    tickerSymbol = symbol;
+Stock::Stock(string companyName, string tickerSymbol, int uniqueId, string name, double currentPrice,
+             int avaliableVolume) {
+    this->companyName = companyName;
+    this->tickerSymbol = tickerSymbol;
     this->uniqueId = uniqueId;
-    setCurrentPrice(currentPrice);
+    this->name = name;
+    this->currentPrice = currentPrice;
+    this->availableVolume = avaliableVolume;
 }
 
 //getter for company name
@@ -39,9 +42,13 @@ string Stock::getTickerSymbol() {
 
 //print stock info
 void Stock::printInfo() const {
-    cout << "Stock: [" <<uniqueId <<"], " << companyName << ", <" << tickerSymbol << ">, current price: $"
-         << fixed << setprecision(2) << currentPrice << ", open: $"
-         << openPrice << ", close: $" << closePrice << endl;
+    cout << name << ": [" << setw(2) <<  uniqueId
+         << "] | " << setw(10) << companyName
+         << " | <" << setw(4) << tickerSymbol << "> | cur price: $"
+         << fixed << setprecision(2) << setw(6) << currentPrice
+         << " | open: $" << setw(6) << openPrice << " | close: $"
+         << setw(6) << closePrice << " | ava volume: "
+         << setw(6) << availableVolume << endl;
 }
 
 //setter for opeen price

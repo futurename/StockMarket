@@ -1,6 +1,6 @@
 class FinancialInstrument
   - name string
-  - currentPrice int
+  - currentPrice double
   - availableVolume
   - uniqueId
 
