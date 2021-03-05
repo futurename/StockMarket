@@ -82,12 +82,12 @@ void Player::removeHolding(Holding holding){
 }
 
 // deduct the amount 
-bool Player::deduct(double amount){
-  if(amount > cash){
+bool Player::modifyCash(double amount){
+  if(amount < 0 && -amount > cash){
     cout << "ERROR, the player doesn't have enought money" << endl;
     return false;
   }
-  cash -= amount;
+  cash += amount;
   return true;
 }
 
