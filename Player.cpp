@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
-#include "FinancialInstrument.h"
 
 using namespace std;
 
