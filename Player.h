@@ -1,6 +1,5 @@
 #pragma once
-
-#include "FinancialInstrument.h"
+#include "Holding.h"
 #include <string>
 
 using namespace std;
@@ -10,7 +9,7 @@ class Player {
 private:
     string playerName;
     double cash;
-    vector<FinancialInstrument *> holdings;
+    vector<Holding> holdings;
 
 public:
     // All player must have a name. 
@@ -25,12 +24,27 @@ public:
     void setCash(double cash);
 
     // To delete or not?
-    vector<FinancialInstrument *> getHodings();
+    vector<Holding> getHodings();
 
-    void setHolding(vector<FinancialInstrument *> holdings);
+    void setHolding(vector<Holding> holdings);
 
-    void addHoding(FinancialInstrument *fi);
 
-    void removeHolding(FinancialInstrument *fi);
+
+    // return true if the player has enought cash
+    //bool validateBuy(double amount);
+
+    // deduct the amount 
+    bool deduct(double amount);
+
+    // give how many shares I can buy if they cost this price
+    int MaxShareAtPrice(double price);
+
+
+    void addHolding(Holding holding);
+
+
+
+    void removeHolding(Holding holding);
+
 
 };
