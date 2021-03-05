@@ -9,13 +9,12 @@
 
 using namespace std;
 
-
 class Market {
-private:
-    vector<Stock> stockList;
-    vector<Commodities> commoditiesList;
-
 public:
+    enum FLUCTUATE_POLICY {
+        SIMPLE_RAMDOM, MARKET_TREND, INDUSTRY_TREND
+    };
+
     template<typename T>
     void print(vector<T> *list, int length, int from = 0);
 
@@ -29,6 +28,24 @@ public:
 
     vector<Commodities> *getCommoditiesList();
 
+    double updateAllPrices(FLUCTUATE_POLICY policy);
+
+    void updatePricesWithMarketTrend();
+
+    void updatePricesWithIndustryTrend();
+
+    void updatePricesWithSimpleRandom();
+
+private:
+    vector<Stock> stockList;
+    vector<Commodities> commoditiesList;
+    const int randRange = 15;
+
+    bool getNumberLine();
+
+    int getRandomRange(int range);
+
+    void setNewPrice(FinancialInstrument* f);
 };
 
 #include "Market.tpp"

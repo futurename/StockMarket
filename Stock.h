@@ -1,26 +1,24 @@
 #pragma  once
+
 #include <iostream>
 #include "FinancialInstrument.h"
 
 using namespace std;
 
 class Stock : public FinancialInstrument {
-private:
-    string companyName;
-    string tickerSymbol;
-    double openPrice = 0.0;
-    double closePrice = 0.0;
-    int volumeTraded = 0.0;
-
 public:
-    Stock(string companyName, string tickerSymbol, int uniqueId,
-          string name = "Stock",  double currentPrice =0.0, int avaliableVolume = 0);
+    enum INDUSTRY {
+        DIGITAL, MEDICAL, ENERGY, BANK
+    };
+
+    Stock(string companyName, string tickerSymbol, int uniqueId, INDUSTRY industry,
+          double currentPrice = 0.0, int availableVolue = 0,string name = "Stock");
 
     string getCompanyName();
 
-    double getOpenPrice();
+    double getOpenPrice() const;
 
-    double getClosePrice();
+    double getClosePrice() const;
 
     void setOpenPrice(double openPrice);
 
@@ -28,9 +26,23 @@ public:
 
     void setVolumeTraded(int volume);
 
-    int getVolumeTraded();
+    int getVolumeTraded() const;
+
+    void setCurrentPrice(double price);
 
     string getTickerSymbol();
 
+    INDUSTRY getIndustry();
+
     void printInfo() const override;
+
+    static string getIndustryString(INDUSTRY industry);
+
+private:
+    string companyName;
+    string tickerSymbol;
+    INDUSTRY industry;
+    double openPrice = 0.0;
+    double closePrice = 0.0;
+    int volumeTraded = 0.0;
 };

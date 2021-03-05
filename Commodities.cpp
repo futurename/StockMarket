@@ -10,8 +10,8 @@ Commodities::Commodities(int uniqueId, string name, double currentPrice, int ava
 }
 
 void Commodities::printInfo() const {
-    cout << name << ": [" << setw(2)<< uniqueId << "] | cur price: $"
+    cout << name << ": [" << setw(2) << right << uniqueId << "] | cur price: $"
          << fixed << setprecision(2) << setw(6) << currentPrice
-         << "| ava volume: " << setw(6) << availableVolume << endl;
+         << "| ava volume: " << setw(6) << left << availableVolume << endl;
 }
 
