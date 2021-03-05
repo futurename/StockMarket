@@ -42,14 +42,17 @@ void Player::setHolding(vector<Holding> holdings){
 
 
 void Player::updateHolding(Holding & holdingToUpdate, const Holding & holdingToAdd){
-
+  //    int shares;
+  //double totalValue;
+  holdingToUpdate.setShares(holdingToUpdate.getShares() + holdingToAdd.getShares());
+  holdingToUpdate.setTotalValue(holdingToUpdate.getTotalValue() + holdingToAdd.getTotalValue());
 
 }
 
 void Player::addHolding(Holding holding){
   int index = -1;
   for(int i= 0; i < holdings.size(); i++){
-    if(holdings[i].getID() == holding.getId()){
+    if(holdings[i].getUniqueID() == holding.getUniqueID()){
       index = i;
       break;
     }
