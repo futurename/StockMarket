@@ -18,7 +18,6 @@ int main() {
     static int uniqueCounter = 0;
     Player player("Kishan", 300);
 
-
     initMarket(market, uniqueCounter);
 
     string userInput;

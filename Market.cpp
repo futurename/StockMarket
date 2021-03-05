@@ -134,30 +134,37 @@ string Market::getTypeById(int id) {
 
 
 void Market::printHoldings(Player &player) {
-    for (Holding holding : player.getHodings()) {
+    cout << setfill('*') << setw(44) << "" << " All Holdings " << setw(44) << ""<< endl;
+    for (Holding& holding : player.getHodings()) {
         int id = holding.getUniqueID();
         string type = getTypeById(id);
         if (type == "Stock") {
             Stock &stock = getStockById(id);
-            printOneProduct(stock);
+            printOneProduct(stock, holding);
         }
         if(type == "Commodities"){
             Commodities& commodity = getCommodityById(id);
-            printOneProduct(commodity);
+            printOneProduct(commodity, holding);
         }
     }
 }
 
-void Market::printOneProduct(Stock &stock) {
-    cout << setfill('*') << setw(20) << "" << " All Holdings " << setw(20) << endl;
+void Market::printOneProduct(Stock &stock, Holding& holding) {
     cout << setfill(' ');
-    cout << setw(2) << stock.getUniqueId() << " | " << setw(10) << stock.getName()
-         << setw(10) << stock.getCompanyName() << " | " << setw(7) << stock.getCurrentPrce() << endl;
+    cout << setw(2) << stock.getUniqueId() << " | " << setw(11) << stock.getName()
+         << " | " << setw(8) << stock.getCompanyName()
+         << " | total: $" << setw(8) <<fixed << setprecision(2)<< holding.getTotalValue()
+         << " | shares: " << setw(4) << holding.getShares()
+         << " | avg: $" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
+         << " | cur price: $" << setw(7) << stock.getCurrentPrce() << endl;
 }
 
-void Market::printOneProduct(Commodities& commodity) {
-    cout << setfill('*') << setw(20) << "" << " All Holdings " << setw(20) << endl;
+void Market::printOneProduct(Commodities& commodity, Holding& holding) {
     cout << setfill(' ');
-    cout << setw(2) << commodity.getUniqueId() << " | " << setw(10) << commodity.getName()
-         << setw(10) << commodity.getCommodityName() << " | " << setw(7) << commodity.getCurrentPrce() << endl;
+    cout << setw(2) << commodity.getUniqueId() << " | " << setw(11) << commodity.getName()
+         << " | " << setw(8) << commodity.getCommodityName()
+         << " | total: $" << setw(8) <<fixed << setprecision(2)<< holding.getTotalValue()
+         << " | shares: " << setw(4) << holding.getShares()
+         << " | avg: $" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
+         << " | cur price: $" << setw(7) << commodity.getCurrentPrce() << endl;
 }

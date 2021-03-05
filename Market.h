@@ -52,9 +52,9 @@ public:
 
     void printHoldings(Player& player);
 
-    void printOneProduct(Stock& stock);
+    void printOneProduct(Stock& stock, Holding& holding);
 
-    void printOneProduct(Commodities& commodity);
+    void printOneProduct(Commodities& commodity, Holding& holding);
 
 private:
     vector<Stock> stockList;
