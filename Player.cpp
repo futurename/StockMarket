@@ -40,10 +40,24 @@ void Player::setHolding(vector<Holding> holdings){
   this->holdings = holdings;
 }
 
+
+void Player::updateHolding(Holding & holdingToUpdate, const Holding & holdingToAdd){
+
+
+}
+
 void Player::addHolding(Holding holding){
-  
-  
-  this->holdings.push_back(holding);
+  int index = -1;
+  for(int i= 0; i < holdings.size(); i++){
+    if(holdings[i].getID() == holding.getId()){
+      index = i;
+      break;
+    }
+  }
+  if(index == -1)
+    this->holdings.push_back(holding);
+  else
+    updateHolding(holdings[index], holding);
 }
 
 void Player::removeHolding(Holding holding){
