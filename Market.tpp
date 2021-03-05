@@ -28,7 +28,7 @@ void Market::print(vector<T> *list, int length, int from) {
     }
 
     string name = (*list).at(0).getName();
-    int titleWidth = name == "Stock"? 36 : 17;
+    int titleWidth = name == "Stock"? 36 : 29;
 
     if (from < size) {
         length = length < size - from ? length : size - from;

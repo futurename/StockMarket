@@ -13,9 +13,9 @@ int main() {
 
     initMarket(market, uniqueCounter);
 
-    market.print(market.getStockList(),0);
+  /*  market.print(market.getStockList(),0);
     market.print(market.getCommoditiesList(),0);
-
+*/
 
 /*    market.print(market.getStockList(), 2);
 
@@ -29,6 +29,7 @@ int main() {
 
     market.updateAllPrices(Market::SIMPLE_RAMDOM);
     market.print(market.getStockList(), 0);
+    market.print(market.getCommoditiesList(),0);
 
 
 

@@ -13,11 +13,19 @@ Commodities::Commodities(int uniqueId, string commodityName, INDUSTRY industry, 
 }
 
 void Commodities::printInfo() const {
+    char indicator;
+    if (previousPrice < 0.001) {
+        indicator = ' ';
+    } else {
+        //indicator =  previousPrice - currentPrice < 0.001 ?"\u2191" : "\u2193";
+        indicator = previousPrice - currentPrice < 0.001 ? '+' : '-';
+    }
     cout << setw(2) << right << uniqueId
          << " | " << setw(6) << commodityName << " | "
          << setw(11) << getIndustryString(industry) << " | cur price: $"
-         << fixed << setprecision(2) << setw(7) << right<< currentPrice
-         << endl;
+         << fixed << setprecision(2) << setw(7) << right << currentPrice
+         << " | pre Price: $" << setw(7) << right << previousPrice
+         << " " << indicator << endl;
 }
 
 string Commodities::getCommodityName() {
