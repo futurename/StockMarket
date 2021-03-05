@@ -70,6 +70,7 @@ void tradeCommodities() {
 
 void tradeStocks() {
 
+
 }
 
 void printMainMenu() {
