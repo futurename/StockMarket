@@ -12,15 +12,15 @@ Holding::Holding(int uniqueId, int shares, double totalValue){
 
 }
 
-int Holding::getUniqueID(){
+int Holding::getUniqueID() const{
   return(uniqueId);
 }
 
-int Holding::getShares(){
+int Holding::getShares() const{
   return(shares);
 }
 
-double Holding::getTotalValue(){
+double Holding::getTotalValue() const{
   return totalValue;
 }
 
