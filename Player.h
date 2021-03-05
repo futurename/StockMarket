@@ -10,6 +10,7 @@ private:
     string playerName;
     double cash;
     vector<Holding> holdings;
+    void updateHolding(Holding & holdingToUpdate, const Holding & holdingToAdd);
 
 public:
     // All player must have a name. 
