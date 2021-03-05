@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <vector>
 #include "Market.h"
 
 void initMarket(Market &market, int &i);
@@ -69,7 +68,7 @@ void tradeCommodities() {
 }
 
 void tradeStocks() {
-
+    
 
 }
 

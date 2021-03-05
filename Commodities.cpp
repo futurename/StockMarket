@@ -32,7 +32,7 @@ string Commodities::getCommodityName() {
     return commodityName;
 }
 
-string Commodities::getIndustryString(Commodities::INDUSTRY industry) const {
+string Commodities::getIndustryString(Commodities::INDUSTRY industry) {
     switch (industry) {
         case METAL:
             return "METAL";

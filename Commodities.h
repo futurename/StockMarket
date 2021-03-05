@@ -17,7 +17,7 @@ public:
 
     string getCommodityName();
 
-    string getIndustryString(INDUSTRY industry) const;
+    static string getIndustryString(INDUSTRY industry) ;
 
 private:
     string commodityName;
