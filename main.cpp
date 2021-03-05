@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "Market.h"
 
@@ -8,7 +7,7 @@ void printMainMenu();
 
 void tradeStocks();
 
-void tradeCommodities();
+void tradeCommodities(Market& market, Player &player);
 
 bool valideInput(string basicString);
 
@@ -17,12 +16,16 @@ using namespace std;
 int main() {
     Market market;
     static int uniqueCounter = 0;
+    Player player("Kishan", 300);
+
 
     initMarket(market, uniqueCounter);
 
     string userInput;
+    bool flag = true;
 
-    while (true) {
+    while (flag) {
+        flag = false;
         printMainMenu();
         getline(cin, userInput);
 
@@ -32,7 +35,7 @@ int main() {
                     tradeStocks();
                     break;
                 case 2:
-                    tradeCommodities();
+                    tradeCommodities(market, player);
                     break;
                 case 3:
                     market.updateAllPrices(Market::SIMPLE_RAMDOM);
@@ -41,11 +44,13 @@ int main() {
                     exit(0);
                 default:
                     cout << "No such choice, please try again.." << endl;
+                    flag = true;
             }
+            
         }
-        cout << "No such choice, please try again.." << endl;
     }
 
+    cout << "The Market will updates: " << endl;
     market.updateAllPrices(Market::SIMPLE_RAMDOM);
     market.print(market.getStockList(), 0);
     market.print(market.getCommoditiesList(), 0);
@@ -63,29 +68,79 @@ bool valideInput(string basicString) {
     return true;
 }
 
-void tradeCommodities() {
-    cout << setw(20) << setfill('*') << "" << " Trade Comodities Menu " << setw(20) << "" << endl;
-    cout << setfill(' ');
-    cout << "Do you want to buy or sell commodities" << endl;
-    cout << "1. Buy" << endl;
-    cout << "2. Sell" << endl;
-    cout << setfill('*') << setw(51) << "" << endl;
-    cout << setfill(' ');
-
+Commodities* askUserWhichCommodity(Market &market){
+  vector<Commodities>* commodities = market.getCommoditiesList();
+  
+  while(1){
+    for(unsigned int i = 0; i < commodities->size(); i++ ){
+      cout << i + 1 << ". ";
+      (*commodities)[i].printInfo();
+      cout << endl;
+    }
     string userInput;
+    int indexCommodity;
     getline(cin, userInput);
     if (valideInput(userInput)) {
-        switch (stoi(userInput)) {
-            default:
-                break;
-        }
+        indexCommodity = stoi(userInput);
+        return(&((*commodities)[indexCommodity - 1]));
     }
+  }
+  // We never arrive here
+  return(&(*commodities)[0]);
+}
+
+
+
+void tradeCommodities(Market &market, Player &player) {  
+  // TODO : modify the setw
+  cout << setw(10) << setfill('*') << "" << " Trade Comodities Menu " << setw(10) << "" << endl;
+  cout << setfill(' ');
+  cout << "Do you want to buy or sell commodities" << endl;
+  cout << "1. Buy" << endl;
+  cout << "2. Sell" << endl;
+  cout << setfill('*') << setw(51) << "" << endl;
+  cout << setfill(' ');
+
+  Commodities* commodity;
+  int nbShares;
+
+  string userInput, userInput2;
+  getline(cin, userInput);
+      if (valideInput(userInput)) {
+          switch (stoi(userInput)) {
+            case 1: // Buy
+              
+              commodity = askUserWhichCommodity(market);
+
+              cout << "You can buy until " <<
+              player.MaxShareAtPrice(commodity->getCurrentPrce()) << "shares" << endl;              
+              while(1){
+                do{
+                  cout << "How many share do you want to buy? ";
+                  getline(cin, userInput2);
+                }while (!valideInput(userInput2));
+                nbShares = stoi(userInput2);
+                if(nbShares > player.MaxShareAtPrice(commodity->getCurrentPrce()))
+                  cout << "You can't buy so many" << endl;
+                else 
+                  break;
+              }
+
+              market.buyByPlayer(player, commodity, nbShares);
+
+              break;
+            case 2:
+              break; 
+            default: 
+              break;
+          }
+      }
 
 
 }
 
 void tradeStocks() {
-
+    
 
 }
 
