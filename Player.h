@@ -1,32 +1,36 @@
 #pragma once
 
-#include "FinancialInstrument"
+#include "FinancialInstrument.h"
 #include <string>
+
 using namespace std;
 
 
-
-class Player{
-  private: 
+class Player {
+private:
     string playerName;
     double cash;
     vector<FinancialInstrument *> holdings;
 
-  public:
+public:
     // All player must have a name. 
     Player(string playerName, int cash = 0);
 
     string getName();
+
     void setName(string name);
 
     double getCash();
+
     void setCash(double cash);
 
     // To delete or not?
     vector<FinancialInstrument *> getHodings();
+
     void setHolding(vector<FinancialInstrument *> holdings);
 
-    void addHoding(FinancialInstrument* fi);
+    void addHoding(FinancialInstrument *fi);
+
     void removeHolding(FinancialInstrument *fi);
 
-}
+};

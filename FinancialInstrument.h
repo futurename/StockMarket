@@ -5,18 +5,24 @@
 using namespace std;
 
 class FinancialInstrument {
-  private:
+protected:
     string name;
     double currentPrice;
     int availableVolume;
 
-  public:
-    void SetName(string passedName);
-    void SetCurrentPrice(double passedCurrentPrice);
-    void SetAvailableVolume(int passedAvailableVolume);
+public:
+    void setName(string passedName);
 
-    string GetName();
-    double GetCurrentPrce();
-    int GetAvailableVolume();
+    void setCurrentPrice(double passedCurrentPrice);
+
+    void setAvailableVolume(int passedAvailableVolume);
+
+    virtual void printInfo() const;
+
+    string getName();
+
+    double getCurrentPrce();
+
+    int getAvailableVolume();
 
 };

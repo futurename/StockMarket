@@ -19,7 +19,7 @@ class Commodities extends FinancialInstrument
 class Market 
   - vector<Stock> stockList
   - vector<Commodities> commoditiesList
-  + PrintFinancialInstruments(int from, int to)
+  + PrintFinancialInstruments
 
 
 

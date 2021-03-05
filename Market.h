@@ -1,4 +1,4 @@
-
+#pragma  once
 #include <iostream>
 #include <vector>
 
@@ -8,17 +8,19 @@
 
 using namespace std;
 
-class Market {
+class Market{
 private:
-    vector<Stock> stockList;
-    vector<Commodities> commoditiesList;
+    vector<Stock*> stockList;
+    vector<Commodities*> commoditiesList;
 public:
-    void printFinancialInstruments(vector<FinancialInstrument> &list, int from, int to);
+    void print(vector<FinancialInstrument* > list, int from, int to);
 
-    void addFinancialInstrument(FinancialInstrument* financialInstrument);
+    void addOne(vector<FinancialInstrument*> list, FinancialInstrument* financialInstrument);
 
-    void removeFinancialInstrument();
+    void removeOne(vector<FinancialInstrument*> list, FinancialInstrument &financialInstrument);
 
+    vector<Stock*> getStockList();
 
+    vector<Commodities*> getCommoditiesList();
 
 };

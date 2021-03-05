@@ -1,25 +1,29 @@
 #include "FinancialInstrument.h"
 
-FinancialInstrument::SetName(string passedName){
-  name = passedName;
+void FinancialInstrument::setName(string passedName) {
+    name = passedName;
 }
 
-FinancialInstrument::SetCurrentPrice(double passedCurrentPrice){
-  currentPrice = passedCurrentPrice;
+void FinancialInstrument::setCurrentPrice(double passedCurrentPrice) {
+    currentPrice = passedCurrentPrice;
 }
 
-FinancialInstrument::SetAvailableVolume(int passedAvailableVolume){
-  availableVolume = passedAvailableVolume;
+void FinancialInstrument::setAvailableVolume(int passedAvailableVolume) {
+    availableVolume = passedAvailableVolume;
 }
 
-string FinancialInstrument::GetName(){
-  return name;
+string FinancialInstrument::getName() {
+    return name;
 }
 
-double FinancialInstrument::GetCurrentPrce(){
-  return price;
+double FinancialInstrument::getCurrentPrce() {
+    return currentPrice;
 }
 
-int FinancialInstrument::GetAvailableVolume(){
-  return availableVolume;
+int FinancialInstrument::getAvailableVolume() {
+    return availableVolume;
+}
+
+void FinancialInstrument::printInfo() const {
+    cout << "FinancialInstrument print()" << endl;
 }

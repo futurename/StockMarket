@@ -37,7 +37,7 @@ vector<FinancialInstrument *> Player::getHodings(){
 }
 
 void Player::setHolding(vector<FinancialInstrument *> holdings){
-  this->holdings = holdings
+  this->holdings = holdings;
 }
 
 void Player::addHoding(FinancialInstrument* fi){
