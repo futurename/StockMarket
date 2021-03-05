@@ -38,15 +38,17 @@ public:
 
     void updatePricesWithSimpleRandom();
 
-    void buyByPlayer(Player player, FinancialInstrument *f, int shares);
+    void buyByPlayer(Player& player, FinancialInstrument *f, int shares);
 
-    void sellByPlayer(Player player, FinancialInstrument *f, int shares);
-
-    int getUniqueIdFromStock(string tickerSymbol);
-
-    int getUniqueIdFromCommodities(string name);
+    void sellByPlayer(Player& player, FinancialInstrument *f, int shares);
 
     FinancialInstrument *getPointerByUniqueId(int uniqueId);
+
+    Stock& getStockById(int id);
+
+    Commodities& getCommodityById(int id);
+
+    string getTypeById(int id);
 
 private:
     vector<Stock> stockList;

@@ -3,9 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
-#include "Holding.h"
-#include "FinancialInstrument.h"
-#include "Market.h"
 
 using namespace std;
 
@@ -101,10 +98,33 @@ void Player::autoPlay() {
 
 }
 
-void Player::printHoldings() {
-    for(Holding holding : holdings){
+void Player::printHoldings(Market &market) {
+    for (Holding holding : holdings) {
         int id = holding.getUniqueID();
-
+        FinancialInstrument *f = market.getPointerByUniqueId(id);
+        printOneProduct(f, market);
     }
 }
+
+void Player::printOneProduct(FinancialInstrument *ptr, Market &market) {
+    string type = market.getTypeById(ptr->getUniqueId());
+
+    if (type == "Stock") {
+        Stock *stock = (Stock *) ptr;
+        cout << setfill('*') << setw(20) << "" << " All Holdings " << setw(20) << endl;
+        cout << setfill(' ');
+        cout << setw(2) << stock->getUniqueId() << " | " << setw(10) << stock->getName()
+             << setw(10) << stock->getCompanyName() << " | " << setw(7) << stock->getCurrentPrce() << endl;
+    }
+    if (type == "Commodities") {
+        Commodities *commodity = (Commodities *) ptr;
+        cout << setfill('*') << setw(20) << "" << " All Holdings " << setw(20) << endl;
+        cout << setfill(' ');
+        cout << setw(2) << commodity->getUniqueId() << " | " << setw(10) << commodity->getName()
+             << setw(10) << commodity->getCommodityName() << " | " << setw(7) << commodity->getCurrentPrce() << endl;
+    }
+
+
+}
+
 

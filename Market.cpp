@@ -70,38 +70,18 @@ int Market::getRandomRange(int range) {
     return rand() % range;
 }
 
-void Market::buyByPlayer(Player player, FinancialInstrument *f, int shares) {
+void Market::buyByPlayer(Player& player, FinancialInstrument *f, int shares) {
     double value = f->getCurrentPrce() * shares;
     player.modifyCash(value * -1);
     Holding holding(f->getUniqueId(), shares, value);
     player.addHolding(holding);
 }
 
-void Market::sellByPlayer(Player player, FinancialInstrument *f, int shares) {
+void Market::sellByPlayer(Player& player, FinancialInstrument *f, int shares) {
     double value = f->getCurrentPrce() * shares;
     player.modifyCash(value);
     Holding holding(f->getUniqueId(), shares* -1, value * -1);
     player.removeHolding(holding);
-}
-
-int Market::getUniqueIdFromStock(string tickerSymbol) {
-    for (Stock s: stockList) {
-        if (s.getTickerSymbol() == tickerSymbol) {
-            return s.getUniqueId();
-        }
-    }
-    cout << "This ticker symbol: " << tickerSymbol << " NOT exist in stock list" << endl;
-    return -1;
-}
-
-int Market::getUniqueIdFromCommodities(string name) {
-    for (Commodities c: commoditiesList) {
-        if (c.getName() == name) {
-            return c.getUniqueId();
-        }
-    }
-    cout << "This name: " << name << " NOT exist in commodities list" << endl;
-    return -1;
 }
 
 FinancialInstrument *Market::getPointerByUniqueId(int uniqueId) {
@@ -117,4 +97,37 @@ FinancialInstrument *Market::getPointerByUniqueId(int uniqueId) {
             return result;
         }
     }
+}
+
+Commodities &Market::getCommodityById(int id) {
+    //Not validate id;
+   for(Commodities& c: commoditiesList){
+       if(c.getUniqueId() == id){
+           return c;
+       }
+   }
+}
+
+Stock &Market::getStockById(int id) {
+    //Not validate id;
+    for(Stock& s: stockList){
+        if(s.getUniqueId() == id){
+            return s;
+        }
+    }
+}
+
+string Market::getTypeById(int id) {
+    //FIXME if id not exists
+    for(Stock& s: stockList){
+        if(s.getUniqueId() == id){
+            return s.getName();
+        }
+    }
+    for(Commodities& c: commoditiesList){
+        if(c.getUniqueId() == id){
+            return c.getName();
+        }
+    }
+    return "Nothing found";
 }

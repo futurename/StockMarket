@@ -1,6 +1,7 @@
 #pragma once
 #include "Holding.h"
 #include <string>
+#include "Market.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ public:
 
     void autoPlay();
 
-    void printHoldings();
+    void printHoldings(Market& market);
 
-
+    void printOneProduct(FinancialInstrument *ptr, Market& market);
 };
