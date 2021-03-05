@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 class Player {
 private:
     string playerName;
@@ -47,7 +46,5 @@ public:
 
     void autoPlay();
 
-    void printHoldings(Market& market);
 
-    void printOneProduct(FinancialInstrument *ptr, Market& market);
 };
