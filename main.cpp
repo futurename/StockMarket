@@ -3,7 +3,15 @@
 #include <vector>
 #include "Market.h"
 
-void initMarket(Market& market, int& i);
+void initMarket(Market &market, int &i);
+
+void printMainMenu();
+
+void tradeStocks();
+
+void tradeCommodities();
+
+bool valideInput(string basicString);
 
 using namespace std;
 
@@ -13,30 +21,69 @@ int main() {
 
     initMarket(market, uniqueCounter);
 
-  /*  market.print(market.getStockList(),0);
-    market.print(market.getCommoditiesList(),0);
-*/
+    string userInput;
 
-/*    market.print(market.getStockList(), 2);
+    while (true) {
+        printMainMenu();
+        getline(cin, userInput);
 
-    market.removeOne(market.getStockList(), 0);
-
-    cout << "size after deletion: " << market.getStockList()->size() << endl;
-    market.print(market.getStockList(), 2, 0);
-    market.addOne(market.getStockList(), stock1);*/
-
-    cout << endl;
+        if (valideInput(userInput)) {
+            switch (stoi(userInput)) {
+                case 1:
+                    tradeStocks();
+                    break;
+                case 2:
+                    tradeCommodities();
+                    break;
+                case 3:
+                    market.updateAllPrices(Market::SIMPLE_RAMDOM);
+                    continue;
+                case 4:
+                    exit(0);
+                default:
+                    cout << "No such choice, please try again.." << endl;
+            }
+        }
+        cout << "No such choice, please try again.." << endl;
+    }
 
     market.updateAllPrices(Market::SIMPLE_RAMDOM);
     market.print(market.getStockList(), 0);
-    market.print(market.getCommoditiesList(),0);
-
+    market.print(market.getCommoditiesList(), 0);
 
 
     return 0;
 }
 
-void initMarket(Market& market, int& uniqueCounter) {
+bool valideInput(string basicString) {
+    for (char c: basicString) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void tradeCommodities() {
+
+}
+
+void tradeStocks() {
+
+}
+
+void printMainMenu() {
+    cout << setw(20) << setfill('*') << "" << " Main Menu " << setw(20) << "" << endl;
+    cout << setfill(' ');
+    cout << "1. Trading stocks today?" << endl
+         << "2. Trading commodities today?" << endl
+         << "3. Bypass today?" << endl
+         << "4. Quit?" << endl
+         << setfill('*') << setw(51) << "" << endl;
+    cout << setfill(' ');
+}
+
+void initMarket(Market &market, int &uniqueCounter) {
 
     Stock stock1("Google", "GOGL", uniqueCounter++, Stock::INDUSTRY::DIGITAL, 243.34);
     Stock stock2("Apple", "APPL", uniqueCounter++, Stock::INDUSTRY::DIGITAL, 435.34);
@@ -64,9 +111,9 @@ void initMarket(Market& market, int& uniqueCounter) {
     Commodities commodities2(uniqueCounter++, "Silver", Commodities::METAL, 687.66);
     Commodities commodities3(uniqueCounter++, "Steel", Commodities::METAL, 1982.10);
     Commodities commodities4(uniqueCounter++, "Oil", Commodities::ENERGY, 45.32);
-    Commodities commodities5(uniqueCounter++, "Coal",Commodities::ENERGY, 656.09);
+    Commodities commodities5(uniqueCounter++, "Coal", Commodities::ENERGY, 656.09);
     Commodities commodities6(uniqueCounter++, "Grain", Commodities::AGRICULTURE, 1209.44);
-    Commodities commodities7(uniqueCounter++, "Sugar",Commodities::AGRICULTURE, 2120.44);
+    Commodities commodities7(uniqueCounter++, "Sugar", Commodities::AGRICULTURE, 2120.44);
     Commodities commodities8(uniqueCounter++, "Cotton", Commodities::AGRICULTURE, 896.44);
 
     market.addOne(market.getCommoditiesList(), commodities1);
