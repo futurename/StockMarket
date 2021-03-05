@@ -7,12 +7,12 @@ using namespace std;
 
 //constructor for init a stock
 Stock::Stock(string companyName, string tickerSymbol, int uniqueId, INDUSTRY industry,
-             double currentPrice, int availableVolume, string name) {
+             double currentPrice, int availableVolume) {
     this->companyName = companyName;
     this->tickerSymbol = tickerSymbol;
     this->uniqueId = uniqueId;
     this->industry = industry;
-    this->name = name;
+    this->name = "Stock";
     this->currentPrice = currentPrice;
     this->availableVolume = availableVolume;
 }
@@ -43,9 +43,8 @@ void Stock::printInfo() const {
         //indicator =  previousPrice - currentPrice < 0.001 ?"\u2191" : "\u2193";
         indicator = previousPrice - currentPrice < 0.001 ? '+' : '-';
     }
-
-    cout << name << ": [" << setw(2) << right << uniqueId
-         << "] | " << setw(10) << companyName
+    cout << setw(2) << right << uniqueId
+         << " | " << setw(10) << companyName
          << " | <" << setw(4) << tickerSymbol
          << "> | " << setw(7) << getIndustryString(industry)
          << " | cur price: $"

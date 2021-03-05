@@ -12,7 +12,7 @@ public:
     };
 
     Stock(string companyName, string tickerSymbol, int uniqueId, INDUSTRY industry,
-          double currentPrice = 0.0, int availableVolue = 0,string name = "Stock");
+          double currentPrice = 0.0, int availableVolue = 0);
 
     string getCompanyName();
 
