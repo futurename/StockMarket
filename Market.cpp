@@ -71,7 +71,10 @@ int Market::getRandomRange(int range) {
 }
 
 void Market::buyByPlayer(Player player, FinancialInstrument *f, int shares) {
-
+    double value = f->getCurrentPrce() * shares;
+    player.deduct(value);
+    Holding holding(f->getUniqueId(), shares, value);
+    player.addHolding(holding);
 }
 
 void Market::sellByPlayer(Player player, FinancialInstrument *f, int shares) {
