@@ -33,3 +33,11 @@ int FinancialInstrument::getUniqueId() {
     return uniqueId;
 }
 
+void FinancialInstrument::setPreviousPrice(double prePrice) {
+    this->previousPrice = prePrice;
+}
+
+double FinancialInstrument::getPreviousPrice() {
+    return previousPrice;
+}
+

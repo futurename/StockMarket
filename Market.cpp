@@ -61,7 +61,7 @@ void Market::setNewPrice(FinancialInstrument *f) {
     double randNum = (rand() % randRange + 1) / 100.0;
     randNum = getNumberLine() ? randNum : randNum * -1;
 
-    cout << randNum << endl;
+    f->setPreviousPrice(f->getCurrentPrce());
 
     f->setCurrentPrice(f->getCurrentPrce() * (randNum + 1));
 }

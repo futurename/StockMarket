@@ -10,6 +10,7 @@ protected:
     double currentPrice;
     int availableVolume;
     int uniqueId;
+    double previousPrice = 0.0;
 
 public:
     void setName(string passedName);
@@ -27,4 +28,8 @@ public:
     int getAvailableVolume();
 
     int getUniqueId();
+
+    void setPreviousPrice(double prePrice);
+
+    double getPreviousPrice();
 };

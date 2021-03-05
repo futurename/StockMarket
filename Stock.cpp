@@ -1,6 +1,8 @@
 #include "Stock.h"
 #include <iostream>
 #include <iomanip>
+#include <Windows.h>
+
 
 using namespace std;
 
@@ -21,16 +23,6 @@ string Stock::getCompanyName() {
     return companyName;
 }
 
-//getter for open price
-double Stock::getOpenPrice() const {
-    return openPrice;
-}
-
-//getter for close price
-double Stock::getClosePrice() const {
-    return closePrice;
-}
-
 //getter for volume traded
 int Stock::getVolumeTraded() const {
     return volumeTraded;
@@ -43,25 +35,24 @@ string Stock::getTickerSymbol() {
 
 //print stock info
 void Stock::printInfo() const {
-    cout << name << ": [" << setw(2) << right << uniqueId
+    SetConsoleOutputCP( CP_UTF8 );
+
+    string indicator;
+    if(previousPrice < 0.001){
+        indicator = " ";
+    }else{
+        indicator =  previousPrice - currentPrice < 0.001 ?"\u2191" : "\u2193";
+    }
+
+    cout << name << ": [" << setw(2)  << right << uniqueId
          << "] | " << setw(10) << companyName
          << " | <" << setw(4) << tickerSymbol
          << "> | " << setw(7) << getIndustryString(industry)
          << " | cur price: $"
          << fixed << setprecision(2) << setw(6) << currentPrice
-         << " | open: $" << setw(6) << openPrice << " | close: $"
-         << setw(6) << closePrice << " | ava volume: "
-         << setw(6) << left << availableVolume << endl;
-}
-
-//setter for open price
-void Stock::setOpenPrice(double openPrice) {
-    this->openPrice = openPrice;
-}
-
-//setter for close price
-void Stock::setClosePrice(double closePrice) {
-    this->closePrice = closePrice;
+         << " | pre Price: $" << setw(6) << previousPrice
+         << " | ava volume: " << setw(6) << left << availableVolume
+         << " " << indicator <<  endl;
 }
 
 //setter for volume traded

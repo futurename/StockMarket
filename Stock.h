@@ -16,14 +16,6 @@ public:
 
     string getCompanyName();
 
-    double getOpenPrice() const;
-
-    double getClosePrice() const;
-
-    void setOpenPrice(double openPrice);
-
-    void setClosePrice(double closePrice);
-
     void setVolumeTraded(int volume);
 
     int getVolumeTraded() const;
@@ -42,7 +34,5 @@ private:
     string companyName;
     string tickerSymbol;
     INDUSTRY industry;
-    double openPrice = 0.0;
-    double closePrice = 0.0;
     int volumeTraded = 0.0;
 };
