@@ -15,7 +15,7 @@ int main() {
     market.addOne(market.getStockList(), stock1);
     market.addOne(market.getStockList(), stock2);
 
-    market.print(market.getStockList(), 0);
+    market.print(market.getStockList(), 2);
 
     market.removeOne(market.getStockList(), 0);
 

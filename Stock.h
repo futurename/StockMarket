@@ -34,5 +34,5 @@ private:
     string companyName;
     string tickerSymbol;
     INDUSTRY industry;
-    int volumeTraded = 0.0;
+    int volumeTraded = 0;
 };

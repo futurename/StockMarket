@@ -53,8 +53,6 @@ void Stock::printInfo() const {
          << " | pre Price: $" << setw(6) << previousPrice
          << " | ava volume: " << setw(6) << left << availableVolume
          << " " << indicator << endl;
-
-    wcout << L'║' << endl;
 }
 
 //setter for volume traded
