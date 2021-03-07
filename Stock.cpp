@@ -43,7 +43,7 @@ void Stock::printInfo() const {
         //indicator =  previousPrice - currentPrice < 0.001 ?"\u2191" : "\u2193";
         indicator = previousPrice - currentPrice < 0.001 ? '+' : '-';
     }
-    cout << setw(2) << right << uniqueId
+    cout << setw(2) << right << (uniqueId + 1)
          << " | " << setw(10) << companyName
          << " | <" << setw(4) << tickerSymbol
          << "> | " << setw(7) << getIndustryString(industry)

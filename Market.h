@@ -50,11 +50,13 @@ public:
 
     string getTypeById(int id);
 
-    void printHoldings(Player& player);
+    void printHoldings(Player& player, Market& market);
 
     void printOneProduct(Stock& stock, Holding& holding);
 
     void printOneProduct(Commodities& commodity, Holding& holding);
+
+    double getStockPrice(int id);
 
 private:
     vector<Stock> stockList;

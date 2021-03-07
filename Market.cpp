@@ -71,17 +71,21 @@ int Market::getRandomRange(int range) {
 }
 
 void Market::buyByPlayer(Player &player, FinancialInstrument *f, int shares) {
-    double value = f->getCurrentPrce() * shares;
-    player.modifyCash(value * -1);
-    Holding holding(f->getUniqueId(), shares, value);
-    player.addHolding(holding);
+    if (shares > 0) {
+        double value = f->getCurrentPrce() * shares;
+        player.modifyCash(value * -1);
+        Holding holding(f->getUniqueId(), shares, value);
+        player.addHolding(holding);
+    }
 }
 
 void Market::sellByPlayer(Player &player, FinancialInstrument *f, int shares) {
-    double value = f->getCurrentPrce() * shares;
-    player.modifyCash(value);
-    Holding holding(f->getUniqueId(), shares * -1, value * -1);
-    player.removeHolding(holding);
+    if (shares > 0) {
+        double value = f->getCurrentPrce() * shares;
+        player.modifyCash(value);
+        Holding holding(f->getUniqueId(), shares * -1, value * -1);
+        player.addHolding(holding);
+    }
 }
 
 FinancialInstrument *Market::getPointerByUniqueId(int uniqueId) {
@@ -133,42 +137,67 @@ string Market::getTypeById(int id) {
 }
 
 
-void Market::printHoldings(Player &player) {
-    if(player.getHodings().size() == 0){
+void Market::printHoldings(Player &player, Market &market) {
+    if (player.getHodings().size() == 0) {
         cout << "Ohh, no any holding in your account, buy something today!" << endl;
+        cout << "Cash left: $" << player.getCash() << endl;
+        double result = player.getTotalBenefit(market);
+        cout << setw(11) << (result > -0.001 ? "Benefit: " : "Loss: ") << "$" << fixed << setprecision(2)
+             << result << endl;
+        cout << endl;
         return;
     }
-    cout << setfill('*') << setw(44) << "" << " All Holdings " << setw(44) << ""<< endl;
-    for (Holding& holding : player.getHodings()) {
+    cout << setfill('*') << setw(49) << "" << " All Holdings " << setw(49) << "" << endl;
+    for (Holding &holding : player.getHodings()) {
         int id = holding.getUniqueID();
         string type = getTypeById(id);
         if (type == "Stock") {
             Stock &stock = getStockById(id);
             printOneProduct(stock, holding);
         }
-        if(type == "Commodities"){
-            Commodities& commodity = getCommodityById(id);
+        if (type == "Commodities") {
+            Commodities &commodity = getCommodityById(id);
             printOneProduct(commodity, holding);
         }
     }
+    cout << "Cash left: $" << player.getCash() << endl;
+    double result = player.getTotalBenefit(market);
+    cout << setw(11) << (result > -0.001 ? "Benefit: " : "Loss: ") << "$" << fixed << setprecision(2)
+         << result << endl;
+    cout << endl;
 }
 
-void Market::printOneProduct(Stock &stock, Holding& holding) {
+void Market::printOneProduct(Stock &stock, Holding &holding) {
     cout << setfill(' ');
-    cout << setw(2) << stock.getUniqueId() << " | " << setw(11) << stock.getName()
-         << " | " << setw(8) << stock.getCompanyName()
-         << " | total: $" << setw(8) <<fixed << setprecision(2)<< holding.getTotalValue()
-         << " | shares: " << setw(4) << holding.getShares()
-         << " | avg: $" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
-         << " | cur price: $" << setw(7) << stock.getCurrentPrce() << endl;
+    cout << setw(2) << (stock.getUniqueId() + 1) << "|" << setw(11) << stock.getName()
+         << "|" << setw(8) << stock.getCompanyName()
+         << "|shares:" << setw(4) << holding.getShares()
+         << "|cur price:$" << setw(7) << stock.getCurrentPrce()
+         << "|cur value:$" << setw(8) << stock.getCurrentPrce() * holding.getShares()
+         << "|cost:$" << setw(8) << fixed << setprecision(2) << holding.getTotalValue()
+         << "|avg:$" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
+         << "|$" <<setw(7) << stock.getCurrentPrce() * holding.getShares() - holding.getTotalValue()
+         << endl;
 }
 
-void Market::printOneProduct(Commodities& commodity, Holding& holding) {
+void Market::printOneProduct(Commodities &commodity, Holding &holding) {
     cout << setfill(' ');
-    cout << setw(2) << commodity.getUniqueId() << " | " << setw(11) << commodity.getName()
-         << " | " << setw(8) << commodity.getCommodityName()
-         << " | total: $" << setw(8) <<fixed << setprecision(2)<< holding.getTotalValue()
-         << " | shares: " << setw(4) << holding.getShares()
-         << " | avg: $" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
-         << " | cur price: $" << setw(7) << commodity.getCurrentPrce() << endl;
+    cout << setw(2) << (commodity.getUniqueId() + 1) << "|" << setw(11) << commodity.getName()
+            << "|" << setw(8) << commodity.getCommodityName()
+            << "|shares: " << setw(4) << holding.getShares()
+            << "|cur price: $" << setw(7) << commodity.getCurrentPrce()
+            << "|cur value: $" << setw(8) << commodity.getCurrentPrce() * holding.getShares()
+            << "|cost: $" << setw(8) << fixed << setprecision(2) << holding.getTotalValue()
+            << "|avg: $" << setw(7) << fixed << setprecision(2) << holding.getTotalValue() / holding.getShares()
+            << "|$" <<setw(7) << commodity.getCurrentPrce() * holding.getShares() - holding.getTotalValue()
+                 << endl;
+}
+
+double Market::getStockPrice(int id) {
+    for (Stock &s: stockList) {
+        if (s.getUniqueId() == id) {
+            return s.getCurrentPrce();
+        }
+    }
+    return 0.0;
 }

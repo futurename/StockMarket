@@ -16,7 +16,7 @@ private:
 public:
     Holding(int uniqueId, int shares = 0, double totalValue= 0.0);
     int getUniqueID() const;
-    int getShares() const;
+    int getShares();
     double getTotalValue() const;
 
     void setShares(int newShares);

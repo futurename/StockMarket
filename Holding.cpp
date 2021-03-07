@@ -16,7 +16,7 @@ int Holding::getUniqueID() const{
   return(uniqueId);
 }
 
-int Holding::getShares() const{
+int Holding::getShares(){
   return(shares);
 }
 

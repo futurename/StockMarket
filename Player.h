@@ -4,16 +4,19 @@
 
 using namespace std;
 
+class Market;
+
 class Player {
 private:
     string playerName;
     double cash;
     vector<Holding> holdings;
-    void updateHolding(Holding & holdingToUpdate, const Holding & holdingToAdd);
+    void updateHolding(Holding & holdingToUpdate, Holding & holdingToAdd);
+    double initFortune;
 
 public:
     // All player must have a name. 
-    Player(string playerName, int cash = 0);
+    Player(string playerName, double cash = 10000);
 
     string getName();
 
@@ -24,11 +27,9 @@ public:
     void setCash(double cash);
 
     // To delete or not?
-    vector<Holding> getHodings();
+    vector<Holding>& getHodings();
 
     void setHolding(vector<Holding> holdings);
-
-
 
     // return true if the player has enought cash
     //bool validateBuy(double amount);
@@ -37,7 +38,9 @@ public:
     bool modifyCash(double amount);
 
     // give how many shares I can buy if they cost this price
-    int MaxShareAtPrice(double price);
+    int getMaxShareAtPrice(double price);
+
+    int getMaxSharesToSell(int uniqueId);
 
     void addHolding(Holding holding);
 
@@ -45,5 +48,9 @@ public:
 
     void autoPlay();
 
+    double getTotalFortune(Market& market);
 
+    double getTotalBenefit(Market& market);
+
+    double getInitFortune();
 };
