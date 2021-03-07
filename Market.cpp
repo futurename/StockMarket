@@ -111,9 +111,6 @@ Commodities &Market::getCommodityById(int id) {
             return c;
         }
     }
-    Commodities commodity;
-    Commodities& commodityRef = commodity;
-    return commodityRef;
 }
 
 Stock &Market::getStockById(int id) {
@@ -123,10 +120,6 @@ Stock &Market::getStockById(int id) {
             return s;
         }
     }
-
-    Stock stock;
-    Stock& stockRef = stock;
-    return stockRef;
 }
 
 string Market::getTypeById(int id) {
