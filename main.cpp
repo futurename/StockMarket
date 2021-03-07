@@ -19,21 +19,21 @@ bool valideExistHolding(int id,const string& type, Player &player);
 
 static int dayCounter = 1;
 static int uniqueCounter = 0;
-const int DAYS_LIMIT = 5;
+const int DAYS_LIMIT = 10;
 
 using namespace std;
 
 int main() {
 
     srand(time(nullptr));
-    
+
     Market market;
 
     Player player("Kishan");
 
     initMarket(market, uniqueCounter);
 
-    cout << "@@@@ Current version can buy/sell stocks @@@@" << endl << endl;
+    cout << "@@@@ Current version can buy/sell stocks, MAX 10 days @@@@" << endl << endl;
 
     market.printHoldings(player, market);
 
