@@ -80,3 +80,7 @@ void Stock::setCurrentPrice(double price) {
     currentPrice = price;
 }
 
+Stock::Stock() {
+
+}
+

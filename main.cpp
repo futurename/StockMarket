@@ -24,6 +24,9 @@ const int DAYS_LIMIT = 5;
 using namespace std;
 
 int main() {
+
+    srand(time(nullptr));
+    
     Market market;
 
     Player player("Kishan");

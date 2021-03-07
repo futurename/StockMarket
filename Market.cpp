@@ -47,14 +47,14 @@ void Market::updatePricesWithSimpleRandom() {
 }
 
 bool Market::getNumberLine() {
-    long int timeNow = time(0);
+    long int timeNow = time(nullptr);
     int shift = getRandomRange(20);
     srand(timeNow << shift);
     return rand() % 2 == 0;
 }
 
 void Market::setNewPrice(FinancialInstrument *f) {
-    long int timeNow = time(0);
+    long int timeNow = time(nullptr);
     int shift = getRandomRange(20);
 
     srand(timeNow << shift);
@@ -101,6 +101,7 @@ FinancialInstrument *Market::getPointerByUniqueId(int uniqueId) {
             return result;
         }
     }
+    return nullptr;
 }
 
 Commodities &Market::getCommodityById(int id) {
@@ -110,6 +111,8 @@ Commodities &Market::getCommodityById(int id) {
             return c;
         }
     }
+    Commodities commodity;
+    return commodity;
 }
 
 Stock &Market::getStockById(int id) {
@@ -119,6 +122,9 @@ Stock &Market::getStockById(int id) {
             return s;
         }
     }
+
+    Stock stock;
+    return stock;
 }
 
 string Market::getTypeById(int id) {

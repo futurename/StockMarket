@@ -43,3 +43,7 @@ string Commodities::getIndustryString(Commodities::INDUSTRY industry) {
     }
 }
 
+Commodities::Commodities() {
+
+}
+

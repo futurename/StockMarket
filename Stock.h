@@ -14,6 +14,8 @@ public:
     Stock(string companyName, string tickerSymbol, int uniqueId, INDUSTRY industry,
           double currentPrice = 0.0, int availableVolue = 0);
 
+    Stock();
+
     string getCompanyName();
 
     void setVolumeTraded(int volume);

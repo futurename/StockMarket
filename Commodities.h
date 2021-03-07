@@ -13,6 +13,8 @@ public:
 
     Commodities(int uniqueId, string commodityName, INDUSTRY industry, double currentPrice = 0.0, int availableVolume = 0);
 
+    Commodities();
+
     void printInfo() const override;
 
     string getCommodityName();
