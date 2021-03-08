@@ -25,7 +25,7 @@ using namespace std;
 
 int main() {
 
-    srand(time(nullptr));
+    srand(time(0));
 
     Market market;
 
