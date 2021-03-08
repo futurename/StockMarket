@@ -161,8 +161,12 @@ void tradeCommodities(Market &market, Player &player) {
     }
 }
 
+// return nullptr if no stock available
 Stock *askUserWhichStock(Market &market, bool ifPrint, Player& player) {
     vector<Stock> *stocks = market.getStockList();
+
+    if(stocks->empty())
+      return nullptr;
 
     while (true) {
         if(ifPrint) {
@@ -221,6 +225,8 @@ void tradeStocks(Market &market, Player &player) {
         switch (stoi(userInput)) {
             case 1:
                 stock = askUserWhichStock(market, true, player);
+                if(stock == nullptr)
+                  break;
                 int maxSharesToBuy;
                 maxSharesToBuy = player.getMaxShareAtPrice(stock->getCurrentPrce());
                 if (maxSharesToBuy == 0) {
@@ -247,8 +253,15 @@ void tradeStocks(Market &market, Player &player) {
                 break;
 
             case 2:
+                // here we have to check if the user have a hoolding to sell
+                if(player.getHodings().empty()){
+                  cout << "Ohh, no any holding in your account, buy something today!" <<endl;
+                  break;
+                }
                 market.printHoldings(player,market);
                 stock = askUserWhichStock(market, false, player);
+                if(stock == nullptr)
+                  break;
 
                 int maxSharesToSell;
                 maxSharesToSell = player.getMaxSharesToSell(stock->getUniqueId());
